@@ -26,9 +26,9 @@ st.write(
     **Například:**
     ```sql
     CREATE TABLE orders (
-        OrderId INTEGER PRIMARY KEY,
+        InvoiceId INTEGER PRIMARY KEY,
         CustomerId INTEGER,
-        OrderDate TEXT  -- Datum ve formátu 'YYYY-MM-DD'
+        InvoiceDate TEXT  -- Datum ve formátu 'YYYY-MM-DD'
     );
     ```
     """
@@ -46,35 +46,42 @@ st.write(
 st.write("### Příklad: Filtrování podle určitého datumu")
 st.code(
     """
-    SELECT * 
-    FROM orders 
-    WHERE OrderDate = '2023-10-01';
+SELECT * 
+FROM Invoice 
+WHERE InvoiceDate > '2009-02-01';
     """,
     language="sql"
 )
-st.write("Tento dotaz vrátí všechny objednávky vytvořené 1. října 2023.")
+st.write("Tento dotaz vrátí všechny faktury vytvořené 1. října 2023.")
 
-st.write("### Příklad: Filtrování objednávek po určitém datu")
+st.write("### Příklad: Filtrování faktur po určitém datu")
 st.code(
     """
-    SELECT * 
-    FROM orders 
-    WHERE OrderDate > '2023-01-01';
+SELECT * 
+FROM Invoice 
+WHERE DATE(InvoiceDate) = '2009-02-01';
     """,
     language="sql"
 )
-st.write("Tento dotaz vybere všechny objednávky provedené po 1. lednu 2023.")
+st.write("Tento dotaz vybere všechny faktury vystavené po 1. lednu 2023.")
+# Poznámka
+st.info("""
+**Poznámka:** Převod sloupce na `DATE` je potřebný s ohledem na typ dat, kdy dle formátu můžeme zjistit, že data jsou DATETIME s nulovým časem. Proto by nám podmínka bez převodu přímo na den nefungovala
+""")
 
 st.write("### Příklad: Použití BETWEEN pro rozsah dat")
 st.code(
     """
-    SELECT * 
-    FROM orders
-    WHERE OrderDate BETWEEN '2023-01-01' AND '2023-12-31';
-    """,
+SELECT * 
+FROM Invoice
+WHERE DATE(InvoiceDate) BETWEEN '2009-01-01' AND '2009-06-30';
+""",
     language="sql"
 )
-st.write("Tento dotaz vybere všechny objednávky vytvořené v roce 2023.")
+st.write("Tento dotaz vybere všechny faktury vytvořené od 01.01.2009 do 30.06.2009.")
+st.info("""
+**Poznámka:** Převod sloupce na `DATE` je zde z podobného důvodu, krajní den v podmínce by nebyl zahrnut.
+""")
 
 # Vestavěné funkce pro data v SQLite
 st.write("## 3. Vestavěné funkce pro práci s daty v SQLite")
@@ -104,8 +111,8 @@ st.write("### Příklad: Převod na jiné formáty pomocí `STRFTIME()`")
 st.code(
     """
     SELECT 
-        STRFTIME('%d.%m.%Y', OrderDate) AS FormatovaneDatum
-    FROM orders;
+        STRFTIME('%d.%m.%Y', InvoiceDate) AS FormatovaneDatum
+    FROM Invoice;
     """,
     language="sql"
 )
@@ -115,14 +122,14 @@ st.write("### Příklad: Výpočet rozdílu mezi datumy")
 st.code(
     """
     SELECT 
-        OrderId, 
-        JULIANDAY(DeliveryDate) - JULIANDAY(OrderDate) AS PocetDni
-    FROM orders;
+        InvoiceId, 
+        JULIANDAY(DATE('now')) - JULIANDAY(InvoiceDate) AS PocetDni
+    FROM Invoice;
     """,
     language="sql"
 )
 st.write(
-    "Tento dotaz vrací počet dnů mezi datem objednávky (`OrderDate`) a datem doručení (`DeliveryDate`)."
+    "Tento dotaz vrací počet dnů mezi datem objednávky (`InvoiceDate`) a datem dnešním datem (`DATE('now')`)."
 )
 
 # Přidávání a odečítání dnů
@@ -141,29 +148,16 @@ st.write(
 st.write("### Příklad: Přidávání dnů k datu objednávky")
 st.code(
     """
-    SELECT 
-        OrderId, 
-        DATE(OrderDate, '+7 DAYS') AS PredpokladaneDoručení
-    FROM orders;
-    """,
+SELECT 
+    InvoiceId AS 'Č. faktury',
+    DATE(InvoiceDate) AS 'Datum vystavení', 
+    DATE(InvoiceDate, '+14 DAYS') AS 'Datum splatnosti'
+FROM Invoice;
+""",
     language="sql"
 )
 st.write(
-    "Tento dotaz přidá 7 dnů k datumu objednávky a vypočítá předpokládané datum doručení."
-)
-
-st.write("### Příklad: Odečítání měsíců od datumu objednávky")
-st.code(
-    """
-    SELECT 
-        OrderId, 
-        DATE(OrderDate, '-1 MONTH') AS MinuleObjednavky
-    FROM orders;
-    """,
-    language="sql"
-)
-st.write(
-    "Tento dotaz odečte 1 měsíc od datumu objednávky a vypočítá, které produkty mohly být objednány měsíc předtím."
+    "Tento dotaz přidá 7 dnů k datumu vystavení faktury a vypočítá datum splatnosti."
 )
 
 # Cvičení
@@ -172,11 +166,10 @@ st.write(
     """
 **Úkoly:**
 
-1. Vyberte objednávky, které byly objednány po `1. srpnu 2023`.
-2. Vypočítejte počet dní mezi objednávkou a doručením pomocí funkcí `JULIANDAY`.
-3. Vypočítejte přesné datum doručení, pokud se doručuje vždy 5 dnů po datu objednávky.
-4. Převádějte datum objednávky do jiného formátu (například DD/MM/YYYY) s použitím `STRFTIME`.
-5. Vyberte objednávky, které byly vytvořeny v roce 2022.
+1. Vyberte faktury, které byly vystaveny po `1. srpnu 2009`.
+2. Vypočítejte datum splatnosti, pokud nastává vždy měsíc po datu vystavení faktury.
+3. Převádějte datum vystavení faktury do jiného formátu (například DD.MM.YYYY) s použitím `STRFTIME`.
+4. Vyberte faktury, které byly vytvořeny v roce 2009.
 """
 )
 

@@ -115,15 +115,32 @@ st.write(
     "Alias `c` je použit pro zpřehlednění zápisu."
 )
 
+st.write("## 4. Použití DISTINCT v SQL")
+st.write("""
+Klauzule `DISTINCT` v SQL slouží k odstranění duplicitních hodnot ve výsledku dotazu. 
+Používá se hlavně v kombinaci s příkazem **SELECT**, aby vrátil pouze unikátní záznamy.
+""")
+
+# Ukázka použití
+st.subheader("Ukázka: Použití DISTINCT")
+st.code("""
+SELECT DISTINCT City
+FROM Customer;
+""", language="sql")
+st.write("""
+Tento dotaz vrátí unikátní seznam měst, ve kterých se nacházejí zákazníci, bez opakování stejných hodnot.
+""")
+
 # Sekce 4: Cvičení
 st.write("## 4. Cvičení na procvičení")
 st.write(
     """
 **Úkoly**:
 
-1. Vytvořte příkaz, který vybere všechny sloupce z tabulky `albums`.
-2. Vyberte pouze název alba (`Title`) z tabulky `albums` a přiřaďte sloupci alias `Nazev_Alba`.
-3. Použijte alias pro tabulku `tracks` a vyberte sloupec `Name` (přidejte mu alias `Skladba`) a `UnitPrice`.
+1. Vytvořte příkaz, který vybere všechny sloupce z tabulky `Track`.
+2. Vyberte pouze název alba (`Title`) z tabulky `Album` a přiřaďte sloupci alias `Název alba`.
+3. Použijte alias pro tabulku `Track` a vyberte sloupec `Name` s aliasem "Skladba" a `UnitPrice` s aliasem "Cena".
+4. Nalezněte jedinečné společnosti (`Company`) uvedené u zákazníků.
 """
 )
 
