@@ -1,8 +1,10 @@
 import streamlit as st
+import reveal_slides as rs
 
 
 def home():
     st.title('O kurzu')
+    # x = rs.slides("""**Test**""")
     st.write("## Zaměření")
     st.markdown(
         """<p style="text-align: justify;">Tento kurz je zaměřen na základy SQL, tedy na klíčový jazyk pro práci s relačními databázemi. Naučíte se, jak dotazovat data pomocí různých příkazů, jako je SELECT, WHERE, ORDER BY, nebo GROUP BY. V průběhu kurzu budete pracovat se skutečnými daty a vyzkoušíte si základní analýzu, manipulaci s daty a optimalizaci dotazů. Kurz je ideální pro začátečníky, kteří chtějí získat pevné základy, a zároveň připravuje na pokročilejší práci s databázemi. Nepotřebujete předchozí zkušenosti – krok za krokem vás provedeme celým procesem.</p>""",
@@ -132,5 +134,7 @@ page_dict = {'Kapitoly': [
 ]}
 
 pg = st.navigation({"Informace": account_pages} | page_dict)
+
+
 
 pg.run()
