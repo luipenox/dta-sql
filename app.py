@@ -99,7 +99,7 @@ sql_06 = st.Page(
 keys_sql = st.Page(
     "sql/additionals/keys_sql.py",
     title="Klíče v SQL",
-    icon=":material/counter_7:")
+    icon=":material/key:")
 
 datatypes_sqlite = st.Page(
     "sql/additionals/datatypes_sqlite.py",
