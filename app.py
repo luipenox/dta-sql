@@ -44,8 +44,9 @@ def contact():
 
 def download():
     st.title("Soubory ke stažení")
+    st.markdown('<a href="assets/downloads/dta_chinook.sqlite" download>Upravená Chinook SQLite DB</a> - ukázková upravená databáze pro potřeby kurzu', unsafe_allow_html=True)
     st.write(
-        "[Chinook SQLite DB](https://github.com/lerocha/chinook-database/blob/master/ChinookDatabase/DataSources/Chinook_Sqlite.sqlite) - ukázková databáze, která simuluje obchod s digitální hudbou, obsahující data o skladbách, umělcích, albech, zákaznících, objednávkách a zaměstnancích")
+        "[Chinook SQLite DB](https://github.com/lerocha/chinook-database/blob/master/ChinookDatabase/DataSources/Chinook_Sqlite.sqlite) - ukázková neupravená databáze, která simuluje obchod s digitální hudbou, obsahující data o skladbách, umělcích, albech, zákaznících, objednávkách a zaměstnancích")
     st.write(
         "[DBeaver](https://dbeaver.io/download/) - univerzální databázový nástroj pro správu, který nabízí grafické rozhraní pro práci s různými relačními i nerelačními databázemi, včetně vizualizace dat a vytváření SQL dotazů")
     st.write(
