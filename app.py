@@ -124,6 +124,16 @@ group = st.Page(
     title="Sdružování (GROUP)",
     icon=":material/counter_4:")
 
+examples = st.Page(
+    "sql/chapters/examples.py",
+    title="Příklady",
+    icon=":material/counter_4:")
+
+homework = st.Page(
+    "sql/chapters/homework.py",
+    title="Domácí úkoly",
+    icon=":material/counter_4:")
+
 sql_02 = st.Page(
     "sql/02.py",
     title="DATE",
@@ -172,7 +182,11 @@ page_dict = {'Kapitoly': [
     keys_sql,
     datatypes_sqlite,
     chinook_structure
-]}
+], 'Praktická část': [
+    examples,
+    homework
+]
+}
 
 pg = st.navigation({"Informace": account_pages} | page_dict)
 
