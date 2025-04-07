@@ -1,10 +1,46 @@
 import streamlit as st
-# import reveal_slides as rs
+import reveal_slides as rs
 
 
 def home():
     st.title('O kurzu')
-    # x = rs.slides("""**Test**""")
+    # Slidy definujeme pomocí Markdown kódu
+    slides_markdown = """
+    # Úvod do SQL
+    ## Luděk Reif 
+
+    ---
+
+    ## SQL
+    ### Structured Query Language
+    - SQL je široce používáno v databázových systémech 
+    - strukturované uchovávání a dotazování dat
+
+    ---
+
+    ## Funkcionalita
+     **zaměříme se na práci s daty**
+
+
+      - DML (Data Manipulation Language): 
+        - vkládání, aktualizace, mazání a vyhledávání 
+        - např. příkazy `SELECT`, `INSERT`, `UPDATE`, `DELETE`
+    """
+
+    # Hlavička Reveal.js (konfigurace prezentace)
+    header = {
+        "title": "Moje Streamlit Prezentace",
+        "theme": "black",  # Lze použít jiné motivy: `white`, `solarized`, `night`, aj.
+        # "transition": "fade",  # Přechodová animace mezi slidy: `slide`, `fade`, atd.
+        "width": 1000,
+        "height": 500,
+        # "enableFullscreen": True
+    }
+
+    # Vykreslení prezentace
+    rs.slides(slides_markdown, config=header)
+
+    # rs.slides("""**Test**""")
     st.write("## Zaměření")
     st.markdown(
         """<p style="text-align: justify;">Tento kurz je zaměřen na základy SQL, tedy na klíčový jazyk pro práci s relačními databázemi. Naučíte se, jak dotazovat data pomocí různých příkazů, jako je SELECT, WHERE, ORDER BY, nebo GROUP BY. V průběhu kurzu budete pracovat se skutečnými daty a vyzkoušíte si základní analýzu, manipulaci s daty a optimalizaci dotazů. Kurz je ideální pro začátečníky, kteří chtějí získat pevné základy, a zároveň připravuje na pokročilejší práci s databázemi. Nepotřebujete předchozí zkušenosti – krok za krokem vás provedeme celým procesem.</p>""",
@@ -83,6 +119,11 @@ union = st.Page(
     title="Spojení (UNION)",
     icon=":material/counter_3:")
 
+group = st.Page(
+    "sql/chapters/group.py",
+    title="Sdružování (GROUP)",
+    icon=":material/counter_4:")
+
 sql_02 = st.Page(
     "sql/02.py",
     title="DATE",
@@ -92,7 +133,6 @@ sql_03 = st.Page(
     "sql/03.py",
     title="GROUP BY",
     icon=":material/counter_3:")
-
 
 sql_06 = st.Page(
     "sql/06.py",
@@ -118,7 +158,6 @@ home_page = st.Page(home, title="O kurzu", icon=":material/info:")
 download_page = st.Page(download, title="Ke stažení", icon=":material/download:")
 contact_page = st.Page(contact, title="Kontakt", icon=":material/import_contacts:")
 
-
 account_pages = [home_page, download_page, contact_page]
 
 page_dict = {'Kapitoly': [
@@ -127,7 +166,8 @@ page_dict = {'Kapitoly': [
     where,
     dates,
     joins,
-    union
+    union,
+    group
 ], 'Doplňující materiály': [
     keys_sql,
     datatypes_sqlite,
@@ -135,7 +175,5 @@ page_dict = {'Kapitoly': [
 ]}
 
 pg = st.navigation({"Informace": account_pages} | page_dict)
-
-
 
 pg.run()
