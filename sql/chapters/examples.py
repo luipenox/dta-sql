@@ -1,4 +1,13 @@
+import sqlite3
+
 import streamlit as st
+import pandas as pd
+
+
+@st.cache_data
+def run_query(query):
+    with sqlite3.connect("assets/downloads/dta_chinook.sqlite") as conn:
+        return pd.read_sql_query(query, conn)
 
 # Definice příkladů
 examples = [
@@ -197,5 +206,7 @@ st.markdown("**Řešení (SQL dotaz):**")
 show_code = st.toggle("Zobrazit řešení")
 if show_code:
     st.code(selected_example["sql"], language="sql")
+    result = run_query(selected_example["sql"])
+    st.dataframe(result)
 else:
     st.code("... (skryto) ...", language="sql")
