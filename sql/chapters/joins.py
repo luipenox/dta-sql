@@ -145,8 +145,8 @@ st.write(
 st.write("### 9. Cvičení: Vyzkoušejte si sami")
 st.write("""
 1. Zobrazte seznam všech zákazníků a zaměstnanců, kteří se o ně starají.
-2. Najděte žánry (tabulka `category`) ke každému filmu, použijte `JOIN` s tabulkou `film_category`.
-3. Získejte seznam všech zaměstnanců a jejich zákazníků.
+2. Najděte žánry (tabulka `Genre`) ke každé skladbě.
+3. Získejte seznam alb, jejich skladeb a interpretů.
 """)
 
 # Závěr
