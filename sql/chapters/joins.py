@@ -145,9 +145,8 @@ st.write(
 st.write("### 9. Cvičení: Vyzkoušejte si sami")
 st.write("""
 1. Zobrazte seznam všech zákazníků a zaměstnanců, kteří se o ně starají.
-2. Najděte žánry (tabulka `category`) a počet filmů v každé kategorii, použijte `JOIN` s tabulkou `film_category`.
-3. Spočítejte celkový obrat (`SUM(payment.amount)`) na každého zákazníka.
-4. Získejte seznam všech zaměstnanců a počty výpůjček, které zprostředkovali, i když žádné výpůjčky nezprostředkovali.
+2. Najděte žánry (tabulka `category`) ke každému filmu, použijte `JOIN` s tabulkou `film_category`.
+3. Získejte seznam všech zaměstnanců a jejich zákazníků.
 """)
 
 # Závěr
