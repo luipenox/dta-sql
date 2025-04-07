@@ -75,14 +75,27 @@ def contact():
         st.info('https://www.linkedin.com/in/luipenox/', icon=":material/link:")
 
     with col2:
-        st.image('assets/images/luipenox.png', width=272)
+        st.image('assets/images/luipenox.jpg', width=272)
 
 
 def download():
-    st.title("Soubory ke stažení")
-    st.markdown('<a href="assets/downloads/dta_chinook.sqlite" download>Upravená Chinook SQLite DB</a> - ukázková upravená databáze pro potřeby kurzu', unsafe_allow_html=True)
+    st.title("SQLite databáze CHINOOK")
+
+    with open('assets/downloads/dta_chinook.sqlite', "rb") as file:
+        sqlite_data = file.read()
+
+    st.download_button(
+        label=f"Stáhnout dta_chinook.sqlite",
+        data=sqlite_data,
+        file_name='dta_chinook.sqlite',
+        mime="application/octet-stream"
+    )
+
+    st.title("Užitečné odkazy")
     st.write(
         "[Chinook SQLite DB](https://github.com/lerocha/chinook-database/blob/master/ChinookDatabase/DataSources/Chinook_Sqlite.sqlite) - ukázková neupravená databáze, která simuluje obchod s digitální hudbou, obsahující data o skladbách, umělcích, albech, zákaznících, objednávkách a zaměstnancích")
+    st.write(
+        "[Beekeeper Studio](https://beekeeperstudio.io/download/) - multiplatformní open-source SQL klient pro správu a interakci s různými databázemi.")
     st.write(
         "[DBeaver](https://dbeaver.io/download/) - univerzální databázový nástroj pro správu, který nabízí grafické rozhraní pro práci s různými relačními i nerelačními databázemi, včetně vizualizace dat a vytváření SQL dotazů")
     st.write(
@@ -107,7 +120,7 @@ where = st.Page(
 dates = st.Page(
     "sql/chapters/dates.py",
     title="Formát data (DATE)",
-    icon=":material/counter_2:")
+    icon=":material/counter_3:")
 
 joins = st.Page(
     "sql/chapters/joins.py",
@@ -117,37 +130,27 @@ joins = st.Page(
 union = st.Page(
     "sql/chapters/union.py",
     title="Spojení (UNION)",
-    icon=":material/counter_3:")
+    icon=":material/counter_5:")
 
 group = st.Page(
     "sql/chapters/group.py",
     title="Sdružování (GROUP)",
-    icon=":material/counter_4:")
+    icon=":material/counter_6:")
 
 examples = st.Page(
     "sql/chapters/examples.py",
     title="Příklady",
-    icon=":material/counter_4:")
+    icon=":material/counter_7:")
 
 homework = st.Page(
     "sql/chapters/homework.py",
     title="Domácí úkoly",
-    icon=":material/counter_4:")
+    icon=":material/counter_8:")
 
-sql_02 = st.Page(
-    "sql/02.py",
-    title="DATE",
-    icon=":material/counter_2:")
-
-sql_03 = st.Page(
-    "sql/03.py",
-    title="GROUP BY",
-    icon=":material/counter_3:")
-
-sql_06 = st.Page(
-    "sql/06.py",
-    title="Poddotazy",
-    icon=":material/counter_6:")
+cte = st.Page(
+    "sql/chapters/cte.py",
+    title="Poddotazy (CTE)",
+    icon=":material/counter_9:")
 
 keys_sql = st.Page(
     "sql/additionals/keys_sql.py",
@@ -177,7 +180,8 @@ page_dict = {'Kapitoly': [
     dates,
     joins,
     union,
-    group
+    group,
+    cte
 ], 'Doplňující materiály': [
     keys_sql,
     datatypes_sqlite,

@@ -263,8 +263,7 @@ examples = [
 ]
 
 # Hlavní funkce aplikace
-st.title("Databáze Chinook - SQL Příklady")
-st.title("Navigace")
+st.title("Domácí úkoly")
 
 # Výběr příkladu
 example_titles = [e["title"] for e in examples]
