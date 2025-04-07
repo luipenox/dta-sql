@@ -139,4 +139,3 @@ st.write(
     "Použitím `UNION` získáte unikátní záznamy, zatímco `UNION ALL` zachová všechny řádky, včetně duplicit."
 )
 st.write("Nezapomeňte, že všechny `SELECT` dotazy musí vracet stejný počet sloupců a odpovídající datové typy.")
-st.write("Pokud máte další otázky o `UNION`, neváhejte mě kontaktovat! 😊")
